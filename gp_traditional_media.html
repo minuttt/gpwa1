@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GP Essay — Traditional Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e11;
+    --surface: #16161a;
+    --surface2: #1e1e24;
+    --border: #2a2a34;
+    --text: #e8e8f0;
+    --muted: #888899;
+    --accent: #c9a84c;
+    --accent2: #7c6fd4;
+    --support: #4a9e7f;
+    --oppose: #7c6fd4;
+    --red: #d4604a;
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,14,17,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 52px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12.5px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    padding: 0 14px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+  nav .brand {
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 16px;
+    padding-left: 0;
+    border: none;
+    flex-shrink: 0;
+  }
+
+  /* LAYOUT */
+  .page { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+  }
+  .meta-chip span { color: var(--text); }
+
+  /* SECTION TITLES */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* KEY LINE BOX */
+  .keyline {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.8rem;
+    margin: 2rem 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.6;
+  }
+
+  /* ESSAY PARAGRAPHS */
+  .essay-block { margin-bottom: 4rem; }
+  .essay-para {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1px;
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: #d0d0de;
+    transition: border-color 0.2s;
+  }
+  .essay-para:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .essay-para:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+  .essay-para:only-child { border-radius: var(--radius); }
+  .essay-para + .essay-para { border-top: none; }
+  .essay-para:hover { border-color: #3a3a48; }
+  .para-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  /* FRAMEWORK CARDS */
+  .framework-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .bp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .bp-card:hover { transform: translateY(-1px); border-color: #3a3a48; }
+
+  .bp-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .bp-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .badge-support { background: rgba(74,158,127,0.15); color: var(--support); border: 1px solid rgba(74,158,127,0.3); }
+  .badge-oppose  { background: rgba(124,111,212,0.15); color: var(--oppose);  border: 1px solid rgba(124,111,212,0.3); }
+
+  .bp-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--text);
+    flex: 1;
+  }
+  .bp-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .bp-toggle {
+    color: var(--muted);
+    font-size: 16px;
+    transition: transform 0.25s;
+    margin-left: 4px;
+    flex-shrink: 0;
+  }
+  .bp-card.open .bp-toggle { transform: rotate(180deg); }
+
+  .bp-body {
+    display: none;
+    padding: 1.4rem 1.6rem;
+    gap: 1rem;
+    flex-direction: column;
+  }
+  .bp-card.open .bp-body { display: flex; }
+
+  .bp-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+    margin-top: 8px;
+  }
+  .bp-point {
+    font-weight: 500;
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+  .bp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .bp-list li {
+    font-size: 13.5px;
+    color: #a0a0b8;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.55;
+  }
+  .bp-list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+  .bp-insight {
+    background: var(--surface2);
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: #b8b8cc;
+    border-left: 2px solid var(--accent2);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+  .bp-rebutting {
+    background: rgba(74,158,127,0.06);
+    border: 1px solid rgba(74,158,127,0.15);
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #7ecfb0;
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+  .bp-strongline {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 4px;
+    font-family: 'Playfair Display', serif;
+  }
+  .bp-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+  /* INTRO FRAMEWORK */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) { .intro-grid { grid-template-columns: 1fr; } }
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.5rem;
+  }
+  .intro-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .intro-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .intro-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .intro-card ul li {
+    font-size: 13.5px;
+    color: #a0a0b8;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .intro-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--accent); font-size: 18px; line-height: 1; }
+
+  /* TABLE */
+  .bp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 1rem;
+  }
+  .bp-table th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .bp-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #b8b8cc;
+    vertical-align: middle;
+  }
+  .bp-table tr:last-child td { border-bottom: none; }
+  .bp-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .bp-table .num { font-family: 'DM Mono', monospace; color: var(--accent); font-size: 12px; }
+  .tag-s { background: rgba(74,158,127,0.15); color: var(--support); border: 1px solid rgba(74,158,127,0.3); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'DM Mono', monospace; }
+  .tag-o { background: rgba(124,111,212,0.15); color: var(--oppose); border: 1px solid rgba(124,111,212,0.3); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'DM Mono', monospace; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* TRANSITION BOX */
+  .transition-box {
+    background: linear-gradient(135deg, rgba(124,111,212,0.08), rgba(74,158,127,0.06));
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent2);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.6rem;
+    text-align: center;
+    font-style: italic;
+    color: #b0b0cc;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    margin: 1.5rem 0;
+  }
+
+  /* MEMORY AID */
+  .memory-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.04));
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: var(--radius);
+    padding: 1.6rem 2rem;
+    margin-top: 1.5rem;
+  }
+  .memory-box .memory-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .memory-box p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1.55;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#">GP Essay</a>
+  <a href="#essay">Full Essay</a>
+  <a href="#intro-framework">Intro</a>
+  <a href="#body-framework">Body BPs</a>
+  <a href="#summary-table">Overview Table</a>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero reveal">
+    <div class="hero-label">H1 General Paper · Paper 1 · Traditional Media</div>
+    <h1>Assess the view that traditional media platforms are <em>no longer relevant.</em></h1>
+    <div class="hero-meta">
+      <div class="meta-chip">Stand: <span>Extent Question</span></div>
+      <div class="meta-chip">BPs: <span>6 body paragraphs</span></div>
+      <div class="meta-chip">Structure: <span>2 Supporting → Transition → 4 Opposing + Rebuttal</span></div>
+    </div>
+  </div>
+
+  <div class="keyline reveal">
+    "The physical format is dying; the institutional model is not — and it is the model that makes traditional media relevant."
+  </div>
+
+  <!-- ═══════════════ FULL ESSAY ═══════════════ -->
+  <div id="essay" class="section-header reveal">
+    <h2>Full Essay</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="essay-block reveal">
+    <div class="essay-para">
+      <span class="para-label">Introduction</span>
+      The rapid rise of digital platforms has radically transformed how information is produced, distributed and consumed. In comparison to the immediacy and algorithm-driven reach of social media, traditional media platforms — such as print newspapers, terrestrial television and radio — appear increasingly outdated. Traditional media refers not merely to physical formats but to an institutional model characterised by professional editorial gatekeeping, legal accountability, structured newsroom hierarchies and long-standing reputational capital. To claim that they are "no longer relevant," however, is to argue that they have lost meaningful impact, influence and value in shaping public discourse. While traditional media has undeniably lost its former dominance and monopoly over information flows, it remains relevant in distinct but evolving ways — particularly in credibility, agenda-setting authority and institutional legitimacy. Its influence may be diminished and reconfigured, but it is far from obsolete.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP1 — Structural Decline (Supporting)</span>
+      Certainly, traditional media has suffered a significant erosion of audience share and economic power. Younger generations increasingly consume news through short-form digital platforms where speed, virality and personalisation trump editorial gatekeeping. Advertising revenue has migrated toward algorithm-driven platforms that offer targeted marketing, weakening the financial foundations of legacy outlets. In this sense, traditional media is less relevant than it once was in commanding attention or setting the pace of information dissemination. However, declining dominance should not be conflated with irrelevance. Relevance must be measured not merely by popularity, but by depth of influence and structural role within society.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP2 — Long-Term Structural Threat (Supporting)</span>
+      Critics may argue that this influence is temporary and unsustainable. As artificial intelligence, citizen journalism and decentralised media models expand, the gatekeeping function of traditional institutions could diminish further. If younger audiences continue disengaging from print and broadcast formats, traditional platforms may struggle to maintain financial viability and cultural relevance. This counterargument is significant because it addresses long-term structural decline rather than short-term adaptation.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP3 — Credibility as Structural Relevance (Opposing + Rebuttal)</span>
+      A key reason traditional media remains relevant lies in its credibility and accountability. Unlike many digital platforms, established media institutions operate under professional journalistic standards, legal liability and editorial oversight. This institutional framework produces a level of trust that algorithm-driven platforms often struggle to replicate. During moments of crisis — whether public health emergencies, elections or geopolitical conflicts — audiences frequently turn to established broadcasters and newspapers for verified updates rather than unfiltered social media feeds. The relevance here is not rooted in speed but in reliability. In a fragmented information ecosystem plagued by misinformation, credibility itself becomes a scarce and valuable resource, reinforcing the continued importance of traditional media institutions.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP4 — Agenda-Setting &amp; Knowledge Production (Opposing + Rebuttal)</span>
+      Moreover, traditional media retains agenda-setting power, even within a digital ecosystem. While social media amplifies content, much of the investigative reporting and in-depth analysis that fuels online discourse originates from legacy newsrooms. Digital platforms often circulate, comment on or react to stories first uncovered by traditional journalists. This suggests that traditional media still performs a foundational function in knowledge production. The architecture of public debate may have shifted online, but its intellectual scaffolding frequently rests upon the reporting infrastructure of conventional outlets. Thus, rather than being replaced, traditional media has become structurally embedded within the digital information chain.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP5 — Adaptation &amp; Institutional Persistence (Opposing + Rebuttal)</span>
+      Yet this prediction underestimates the adaptive capacity of institutions. Traditional media has increasingly embraced hybrid models, integrating digital subscriptions, podcasts, livestreaming and social media engagement into their operations. In doing so, they retain their core strengths — investigative rigour, editorial standards and institutional legitimacy — while participating in digital distribution networks. Relevance, therefore, may no longer reside in the physical format of newspapers or broadcast schedules, but in the enduring authority of the institutions behind them. The medium evolves; the institutional influence persists.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">BP6 — Contextual Variation (Opposing + Rebuttal of Absolute Claim)</span>
+      Furthermore, relevance must be assessed across demographic and geopolitical contexts. In regions with limited internet infrastructure or among older populations, radio and television remain primary information sources. Even in highly digitised societies, official announcements delivered through televised addresses often carry symbolic authority and national weight that fragmented digital posts cannot replicate. Such broadcasts function not merely as information delivery mechanisms but as ritualised moments of collective attention, reinforcing their continued socio-political significance.
+    </div>
+    <div class="essay-para">
+      <span class="para-label">Conclusion</span>
+      Ultimately, traditional media platforms are no longer unrivalled, but neither are they irrelevant. Their dominance has waned, and their modes of engagement have transformed. However, through credibility, agenda-setting capacity, institutional legitimacy and adaptive integration into digital ecosystems, they continue to shape public discourse in substantive ways. The view that traditional media is "no longer relevant" confuses declining monopoly with extinction. In reality, relevance has shifted from control over speed to authority over substance. As long as societies value verified information and structured accountability, traditional media — albeit in evolving forms — will remain integral to the media landscape.
+    </div>
+  </div>
+
+  <!-- ═══════════════ INTRO FRAMEWORK ═══════════════ -->
+  <div id="intro-framework" class="section-header reveal">
+    <h2>Intro Framework</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="intro-grid reveal">
+    <div class="intro-card">
+      <span class="intro-card-label">A — Context</span>
+      <h3>Set the scene</h3>
+      <ul>
+        <li>Digital revolution</li>
+        <li>Algorithm-driven platforms</li>
+        <li>Shift in consumption patterns</li>
+      </ul>
+    </div>
+    <div class="intro-card">
+      <span class="intro-card-label">B — Define "Traditional Media"</span>
+      <h3>Not just format — institutional model</h3>
+      <ul>
+        <li>Professional editorial gatekeeping</li>
+        <li>Legal accountability</li>
+        <li>Structured newsroom hierarchies</li>
+        <li>Long-standing reputational capital</li>
+        <li><em>Prevents definitional loophole</em></li>
+      </ul>
+    </div>
+    <div class="intro-card">
+      <span class="intro-card-label">C — Define "Relevant"</span>
+      <h3>Relevance = meaningful impact in:</h3>
+      <ul>
+        <li>Shaping public discourse</li>
+        <li>Agenda-setting</li>
+        <li>Knowledge production</li>
+        <li>Political legitimacy</li>
+        <li>Societal trust</li>
+        <li><em>Not just popularity or speed</em></li>
+      </ul>
+    </div>
+    <div class="intro-card">
+      <span class="intro-card-label">D — Stand (Continuum)</span>
+      <h3>Your position</h3>
+      <ul>
+        <li>Lost dominance and monopoly ✓</li>
+        <li>Influence reconfigured ✓</li>
+        <li>Still structurally significant ✓</li>
+        <li>Absolute claim is exaggerated ✓</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ BODY FRAMEWORK ═══════════════ -->
+  <div id="body-framework" class="section-header reveal">
+    <h2>Body Paragraph Framework</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="framework-grid">
+
+    <!-- BP1 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-support">SUPPORTING</span>
+        <span class="bp-title">BP1 — Structural Decline</span>
+        <span class="bp-role">Loss of dominance</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Purpose</div>
+          <div class="bp-point">Show you acknowledge real decline — give the other side genuine weight.</div>
+        </div>
+        <div class="bp-divider"></div>
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Traditional media is less dominant today.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Evidence Angles</div>
+          <ul class="bp-list">
+            <li>Youth → short-form digital</li>
+            <li>Algorithmic visibility replaces editorial curation</li>
+            <li>Advertising migration to targeted platforms</li>
+            <li>Attention economy erodes legacy reach</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bp-section-label">Analysis</div>
+          <ul class="bp-list">
+            <li>Loss of speed advantage</li>
+            <li>Reduced audience capture</li>
+            <li>Erosion of economic power</li>
+          </ul>
+        </div>
+        <div class="bp-insight">Supports the claim because declining reach suggests declining relevance.</div>
+        <div class="bp-strongline">Mini Evaluation: Dominance ≠ relevance.</div>
+      </div>
+    </div>
+
+    <!-- BP2 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-support">SUPPORTING</span>
+        <span class="bp-title">BP2 — Long-Term Structural Threat</span>
+        <span class="bp-role">Unsustainability argument</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Purpose</div>
+          <div class="bp-point">Make the opposing side serious — this is your strongest pro-claim paragraph.</div>
+        </div>
+        <div class="bp-divider"></div>
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Traditional media's influence may be unsustainable long-term.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Reasons</div>
+          <ul class="bp-list">
+            <li>AI-generated content</li>
+            <li>Citizen journalism</li>
+            <li>Generational disengagement</li>
+            <li>Financial instability</li>
+          </ul>
+        </div>
+        <div class="bp-insight">If attention permanently shifts, credibility alone may not sustain influence.</div>
+      </div>
+    </div>
+
+    <!-- TRANSITION -->
+    <div class="transition-box reveal">
+      ⟶ &nbsp; Decline in dominance does not automatically equal irrelevance. &nbsp; ⟵
+    </div>
+
+    <!-- BP3 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-oppose">OPPOSING + REBUTTAL</span>
+        <span class="bp-title">BP3 — Credibility as Structural Relevance</span>
+        <span class="bp-role">Rebuttal of BP1 &amp; BP2</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Credibility and accountability sustain relevance.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Rebutting</div>
+          <div class="bp-rebutting">BP1's idea that lower popularity = irrelevance · BP2's fear that structural decline eliminates impact</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Why</div>
+          <ul class="bp-list">
+            <li>Editorial standards</li>
+            <li>Legal liability</li>
+            <li>Professional verification</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bp-section-label">Analytical Depth</div>
+          <div class="bp-insight">In misinformation-heavy ecosystems: trust becomes scarce → scarcity increases value → relevance rooted in reliability, not virality.</div>
+        </div>
+        <div class="bp-strongline">Even if they lose speed and audience, they retain structural authority.</div>
+      </div>
+    </div>
+
+    <!-- BP4 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-oppose">OPPOSING + REBUTTAL</span>
+        <span class="bp-title">BP4 — Agenda-Setting &amp; Knowledge Production</span>
+        <span class="bp-role">Rebuttal of "Digital fully replaced traditional"</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Traditional media still produces foundational reporting.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Mechanism</div>
+          <ul class="bp-list">
+            <li>Investigative journalism originates in legacy newsrooms</li>
+            <li>Digital platforms amplify rather than originate</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bp-section-label">Rebutting</div>
+          <div class="bp-rebutting">The idea that digital platforms now fully control discourse.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Key Distinction</div>
+          <div class="bp-insight">Visibility power (digital) vs. Production power (traditional). Control of substance &gt; control of speed.</div>
+        </div>
+        <div class="bp-strongline">They remain structurally embedded in the digital information chain.</div>
+      </div>
+    </div>
+
+    <!-- BP5 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-oppose">OPPOSING + REBUTTAL</span>
+        <span class="bp-title">BP5 — Adaptation &amp; Institutional Persistence</span>
+        <span class="bp-role">Rebuttal of BP2 (unsustainability)</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Institutions adapt; relevance shifts form.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Mechanism</div>
+          <ul class="bp-list">
+            <li>Hybrid models</li>
+            <li>Digital integration</li>
+            <li>Subscription systems</li>
+            <li>Social media presence</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bp-section-label">Rebutting</div>
+          <div class="bp-rebutting">The idea that integration = identity loss.</div>
+        </div>
+        <div class="bp-insight">Critical clarification: Integration ≠ loss of institutional character. The editorial model persists.</div>
+        <div class="bp-strongline">Relevance now lies in authority, not monopoly. The medium evolves; the institutional influence persists.</div>
+      </div>
+    </div>
+
+    <!-- BP6 -->
+    <div class="bp-card reveal" onclick="toggleCard(this)">
+      <div class="bp-header">
+        <span class="bp-badge badge-oppose">OPPOSING + REBUTTAL</span>
+        <span class="bp-title">BP6 — Contextual Variation</span>
+        <span class="bp-role">Rebuttal of the absolute claim "no longer"</span>
+        <span class="bp-toggle">▾</span>
+      </div>
+      <div class="bp-body">
+        <div>
+          <div class="bp-section-label">Point</div>
+          <div class="bp-point">Relevance varies across contexts — the absolute claim cannot hold.</div>
+        </div>
+        <div>
+          <div class="bp-section-label">Why</div>
+          <ul class="bp-list">
+            <li>Demographics — older populations rely on radio/TV</li>
+            <li>Infrastructure — limited internet regions</li>
+            <li>Political systems — televised addresses carry national symbolic weight</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bp-section-label">Rebutting</div>
+          <div class="bp-rebutting">The universal nature of the claim — it assumes uniform irrelevance. Reality is differentiated.</div>
+        </div>
+        <div class="bp-insight">Broadcasts function as ritualised moments of collective attention — socio-political function beyond information delivery.</div>
+        <div class="bp-strongline">Therefore: the absolute collapses.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════ SUMMARY TABLE ═══════════════ -->
+  <div id="summary-table" class="section-header reveal">
+    <h2>Overview Table</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="reveal" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+    <table class="bp-table">
+      <thead>
+        <tr>
+          <th>Para</th>
+          <th>Function</th>
+          <th>Role</th>
+          <th>Core Move</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">BP1</td>
+          <td><span class="tag-s">Supporting</span></td>
+          <td>Loss of dominance</td>
+          <td>Audience erosion + ad revenue decline; seeds dominance ≠ relevance</td>
+        </tr>
+        <tr>
+          <td class="num">BP2</td>
+          <td><span class="tag-s">Supporting</span></td>
+          <td>Structural unsustainability</td>
+          <td>AI, citizen journalism, generational disengagement — long-term threat</td>
+        </tr>
+        <tr>
+          <td class="num">BP3</td>
+          <td><span class="tag-o">Opposing + Rebuttal</span></td>
+          <td>Credibility sustains relevance</td>
+          <td>Trust = scarce resource; reliability &gt; virality</td>
+        </tr>
+        <tr>
+          <td class="num">BP4</td>
+          <td><span class="tag-o">Opposing + Rebuttal</span></td>
+          <td>Agenda-setting persists</td>
+          <td>Production power vs visibility power; structurally embedded</td>
+        </tr>
+        <tr>
+          <td class="num">BP5</td>
+          <td><span class="tag-o">Opposing + Rebuttal</span></td>
+          <td>Adaptation preserves identity</td>
+          <td>Medium evolves; institutional authority persists</td>
+        </tr>
+        <tr>
+          <td class="num">BP6</td>
+          <td><span class="tag-o">Opposing + Rebuttal</span></td>
+          <td>Absolute claim fails</td>
+          <td>Contextual variation collapses the "no longer" universalism</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MEMORY AID -->
+  <div class="memory-box reveal" style="margin-top:3rem;">
+    <span class="memory-label">Memorise This — One Line Answer</span>
+    <p>"Declining monopoly ≠ extinction. Relevance has shifted from control over speed to authority over substance."</p>
+  </div>
+
+</div>
+
+<script>
+  function toggleCard(card) {
+    card.classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
